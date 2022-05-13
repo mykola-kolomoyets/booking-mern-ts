@@ -1,0 +1,85 @@
+@import "./../../styles/mixins.scss";
+@import "./../../styles/colors.scss";
+
+.header {
+    @include flex(row, flex-start, center);
+    position: relative;
+    background-color: $blue;
+    color: $white;
+
+    &__container {
+        width: 100%;
+        @include container();
+        margin: 20px 0 100px 0;
+    }
+
+    &__title {
+        font-size: 36px;
+        margin: 0;
+    }
+
+    &__description {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    &__list {
+        @include flex(row, center, flex-start, 40px);
+        margin-bottom: 50px;
+
+        &_item {
+            @include flex(row, center, flex-start, 10px);
+
+            &.active {
+                border: 1px solid $white;
+                padding: 10px;
+                border-radius: 20px;
+            }
+        }
+    }
+
+    &__login {
+        &_button {
+            background-color: $light-blue;
+            color: $white;
+            font-weight: 500;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+
+    &__search {
+        @include flex(row, center, space-around);
+        @include container();
+        position: absolute;
+        box-sizing: border-box;
+        bottom: -25px;
+        background-color: $white;
+        border: 3px solid $yellow;
+        padding: 10px 0;
+        border-radius: 5px;
+
+        &__item {
+            position: relative;
+        }
+    }
+
+    &__input {
+        @include flex(row, center, flex-start, 10px);
+
+        &_field {
+            border: none;
+            outline: none;
+        }
+
+        &_text {
+            color: $light-gray;
+            cursor: pointer;
+        }
+
+        &_icon {
+            color: $light-gray;
+        }
+    }
+}

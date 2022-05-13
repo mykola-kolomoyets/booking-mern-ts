@@ -1,0 +1,32 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/mixins.scss";
+
+.navbar {
+    @include flex(row, center, center);
+    position: relative;
+    height: 50px;
+    background-color: $blue;
+
+    &__container {
+        @include flex(row, center, space-between, 16px);
+        @include container();
+        padding-inline: 12px;
+        height: 100%;
+        color: $white;
+    }
+
+    &__logo {
+        font-weight: 500;
+    }
+
+    &__button {
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        color: $blue;
+
+        & + & {
+            margin-left: 12px;
+        }
+    }
+}

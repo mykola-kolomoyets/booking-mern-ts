@@ -1,12 +1,25 @@
-import React from 'react';
-import './App.scss';
+import React, { lazy, Suspense } from "react";
 
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import "./App.scss";
+
+const HomePage = lazy(() => import("./pages/home"));
+const HotelsPage = lazy(() => import("./pages/hotels"));
+const HotelView = lazy(() => import("./pages/hotels/hotel-view"));
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>Hello world</h1>
-    </div>
+    <BrowserRouter>
+      <Suspense fallback={"Loading..."}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/hotels" element={<HotelsPage />} />
+          <Route path="/hotels/:id" element={<HotelView />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
