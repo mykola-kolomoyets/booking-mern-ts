@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   faBed,
   faCalendarDays,
   faPerson
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DateRange, Range } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
 
 import styles from "./../header.module.scss";
+import { BookingOptions, formatDate, isPlural } from "./header-search.utils";
 
 const HeaderSearch = () => {
+  const [isDateOpened, setIsDateOpened] = useState(false);
+  const [isOptionsOpened, setIsOptionsOpened] = useState(false);
+
+  const [date, setDate] = useState<Range[]>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection"
+    }
+  ]);
+  const [options, setOptions] = useState<BookingOptions>({
+    adults: 1,
+    children: 1,
+    rooms: 1
+  });
+
+  const onDateToggle = () => setIsDateOpened((prev) => !prev);
+
   return (
     <section className={styles.header__search}>
       <div className={styles.header__search_item}>
@@ -31,7 +54,21 @@ const HeaderSearch = () => {
             icon={faCalendarDays}
           />
 
-          <span className={styles.header__input_text}>date to date</span>
+          <span className={styles.header__input_text} onClick={onDateToggle}>
+            {`${formatDate(date[0].startDate!)}
+              to
+              ${formatDate(date[0].endDate!)}`}
+          </span>
+
+          {isDateOpened && (
+            <DateRange
+              editableDateInputs={true}
+              onChange={(item) => setDate([item.selection])}
+              moveRangeOnFirstSelection={false}
+              ranges={date}
+              className={styles.header__input_date}
+            />
+          )}
         </label>
       </div>
 
@@ -43,7 +80,10 @@ const HeaderSearch = () => {
           />
 
           <span className={styles.header__input_text}>
-            2 children, 2 adults, 1 room
+            {`${options.adults} adult${isPlural(options.adults) ? "s" : ""} • 
+							${options.children} ${isPlural(options.children) ? "children" : "kid"} • 
+							${options.rooms} room${isPlural(options.rooms) ? "s" : ""}
+						`}
           </span>
         </label>
       </div>

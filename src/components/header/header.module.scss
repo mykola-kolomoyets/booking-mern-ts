@@ -73,6 +73,11 @@
             outline: none;
         }
 
+        &_date {
+            position: absolute;
+            top: 50px;
+        }
+
         &_text {
             color: $light-gray;
             cursor: pointer;
