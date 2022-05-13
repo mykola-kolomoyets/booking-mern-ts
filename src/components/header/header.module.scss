@@ -86,5 +86,43 @@
         &_icon {
             color: $light-gray;
         }
+
+        &_options {
+            position: absolute;
+            top: 50px;
+            background-color: $white;
+            color: $gray;
+            border-radius: 5px;
+            box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.4);
+
+            &_item {
+                @include flex(row, center, space-between);
+                width: 200px;
+                margin: 10px;
+
+                &_counter {
+                    @include flex(row, center, flex-start, 10px);
+                    font-size: 12px;
+                    color: $black;
+                }
+
+                &_button {
+                    @include size(30px);
+                    background-color: $white;
+                    border: 1px solid $light-blue;
+                    color: $light-blue;
+                    cursor: pointer;
+
+                    &:disabled {
+                        background-color: $light-gray;
+                    }
+                }
+
+                &_value {
+                    min-width: 20px;
+                    text-align: center;
+                }
+            }
+        }
     }
 }

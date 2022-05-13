@@ -8,10 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange, Range } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from "date-fns";
 
 import styles from "./../header.module.scss";
-import { BookingOptions, formatDate, isPlural } from "./header-search.utils";
+import {
+  BookingOptions,
+  capitalize,
+  formatDate,
+  isPlural
+} from "./header-search.utils";
 
 const HeaderSearch = () => {
   const [isDateOpened, setIsDateOpened] = useState(false);
@@ -31,6 +35,18 @@ const HeaderSearch = () => {
   });
 
   const onDateToggle = () => setIsDateOpened((prev) => !prev);
+
+  const onOptionChange = (
+    field: keyof typeof options,
+    isIncrement: boolean
+  ) => {
+    setOptions((prev) => ({
+      ...prev,
+      [field]: isIncrement ? prev[field] + 1 : prev[field] - 1
+    }));
+  };
+
+  const onOptionsToggle = () => setIsOptionsOpened((prev) => !prev);
 
   return (
     <section className={styles.header__search}>
@@ -79,12 +95,49 @@ const HeaderSearch = () => {
             icon={faPerson}
           />
 
-          <span className={styles.header__input_text}>
+          <span className={styles.header__input_text} onClick={onOptionsToggle}>
             {`${options.adults} adult${isPlural(options.adults) ? "s" : ""} • 
 							${options.children} ${isPlural(options.children) ? "children" : "kid"} • 
 							${options.rooms} room${isPlural(options.rooms) ? "s" : ""}
 						`}
           </span>
+
+          {isOptionsOpened && (
+            <div className={styles.header__input_options}>
+              {Object.entries(options).map(([key, value]) => (
+                <div className={styles.header__input_options_item}>
+                  <span className={styles.header__input_options_item_title}>
+                    {capitalize(key)}
+                  </span>
+
+                  <div className={styles.header__input_options_item_counter}>
+                    <button
+                      className={styles.header__input_options_item_button}
+                      onClick={() =>
+                        onOptionChange(key as keyof typeof options, false)
+                      }
+                      disabled={value === 0}
+                    >
+                      -
+                    </button>
+
+                    <span className={styles.header__input_options_item_value}>
+                      {value}
+                    </span>
+
+                    <button
+                      className={styles.header__input_options_item_button}
+                      onClick={() =>
+                        onOptionChange(key as keyof typeof options, true)
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </label>
       </div>
 

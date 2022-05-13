@@ -9,3 +9,5 @@ export type BookingOptions = {
 };  
 
 export const isPlural = (value: number) => value > 1;
+
+export const capitalize = (value: string) => `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;

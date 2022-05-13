@@ -17,3 +17,8 @@
         width: min(100%, $max-width);
     }
 }
+
+@mixin size($size) {
+    width: $size;
+    height: $size;
+}
