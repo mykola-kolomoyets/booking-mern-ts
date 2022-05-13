@@ -1,0 +1,15 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/mixins.scss";
+
+.home {
+    @include flex(column, center, flex-start, 30px);
+    margin-top: 50px;
+
+    &__property {
+        @include container();
+
+        &_title {
+            font-size: 24px;
+        }
+    }
+}

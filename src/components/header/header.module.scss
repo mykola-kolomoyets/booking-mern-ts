@@ -10,7 +10,10 @@
     &__container {
         width: 100%;
         @include container();
-        margin: 20px 0 100px 0;
+
+        &_extended {
+            margin: 20px 0 100px 0;
+        }
     }
 
     &__title {
@@ -76,6 +79,7 @@
         &_date {
             position: absolute;
             top: 50px;
+            z-index: 200;
         }
 
         &_text {
@@ -94,6 +98,7 @@
             color: $gray;
             border-radius: 5px;
             box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.4);
+            z-index: 200;
 
             &_item {
                 @include flex(row, center, space-between);
