@@ -31,15 +31,8 @@ const Home = () => {
 
           <LovedList />
         </section>
-
-        <section className={styles.home__email}>
-          <h2 className={cn(styles.home__email_title, styles.title)}>
-            Email list
-          </h2>
-
-          <EmailList />
-        </section>
       </section>
+      <EmailList />
     </article>
   );
 };

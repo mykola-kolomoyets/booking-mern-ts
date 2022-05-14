@@ -3,6 +3,7 @@ import React, { Fragment, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.scss";
+import Footer from "./components/footer";
 import Header from "./components/header";
 import Navbar from "./components/navbar";
 
@@ -25,6 +26,8 @@ const App = () => {
           </Routes>
         </Suspense>
       </BrowserRouter>
+
+      <Footer />
     </Fragment>
   );
 };
