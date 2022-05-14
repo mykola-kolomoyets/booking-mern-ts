@@ -5,7 +5,8 @@ import Featured from "../../components/featured";
 import PropertyList from "../../components/property-list";
 
 import styles from "./home.module.scss";
-import LovedList from "../../components/loved";
+import LovedList from "../../components/loved-list";
+import EmailList from "../../components/email-list";
 
 const Home = () => {
   return (
@@ -29,6 +30,14 @@ const Home = () => {
           </h2>
 
           <LovedList />
+        </section>
+
+        <section className={styles.home__email}>
+          <h2 className={cn(styles.home__email_title, styles.title)}>
+            Email list
+          </h2>
+
+          <EmailList />
         </section>
       </section>
     </article>
